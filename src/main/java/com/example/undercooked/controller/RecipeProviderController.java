@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RecipeProviderController {
 
-
     @GetMapping("/main")
     public ResponseEntity<?> getMain() {
         return ResponseEntity.ok("Give me food!");
