@@ -21,7 +21,7 @@ public class IngredientDao implements IngredientDaoInterface {
     }
 
     @Override
-    public Set<Ingredient> getAllIngredients() {
+        public Set<Ingredient> getAllIngredients() {
         Set<Ingredient> allIngredient = new HashSet<>();
         String query = "SELECT ingredient.id, ingredient.name, food_category.name AS food_category FROM ingredient JOIN food_category ON ingredient.food_category = food_category.id";
         try (Connection connection = connector.getConnection();
@@ -36,13 +36,10 @@ public class IngredientDao implements IngredientDaoInterface {
                 System.out.println(ingredient.toString());
             }
 
-
             return allIngredient;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
-
 }
