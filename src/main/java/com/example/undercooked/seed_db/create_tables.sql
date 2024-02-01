@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS food_category (
 );
 
 CREATE TABLE IF NOT EXISTS ingredient(
-    id            SMALLSERIAL PRIMARY KEY AUTOINCREMENT,
+    id            SMALLSERIAL PRIMARY KEY,
     name          VARCHAR(255) NOT NULL,
     food_category INTEGER REFERENCES food_category(id) NOT NULL
 );
@@ -33,4 +33,5 @@ CREATE TABLE IF NOT EXISTS pantry(
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES user_account(id) NOT NULL,
     ingredient_id INTEGER REFERENCES ingredient(id) NOT NULL
+
 );
