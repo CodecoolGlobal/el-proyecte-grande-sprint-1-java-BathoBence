@@ -33,5 +33,4 @@ CREATE TABLE IF NOT EXISTS pantry(
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES user_account(id) NOT NULL,
     ingredient_id INTEGER REFERENCES ingredient(id) NOT NULL
-
 );
