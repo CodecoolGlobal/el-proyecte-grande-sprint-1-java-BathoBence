@@ -7,11 +7,9 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class OpenPantryService {
-    private final RestTemplate restTemplate;
     private static final Logger logger = LoggerFactory.getLogger(OpenPantryService.class);
 
-    public OpenPantryService(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
+    public OpenPantryService() {
+     }
 
 }
