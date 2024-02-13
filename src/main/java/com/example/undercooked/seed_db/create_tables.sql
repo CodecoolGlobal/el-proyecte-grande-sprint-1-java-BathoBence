@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS recipe (
+CREATE TABLE IF NOT EXISTS recipeGuide (
     id          SMALLSERIAL PRIMARY KEY,
     name        VARCHAR(255) NOT NULL,
     description TEXT         NOT NULL
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS ingredient(
 
 CREATE TABLE IF NOT EXISTS recipe_ingredient(
     id SMALLSERIAL PRIMARY KEY,
-    recipe_id INTEGER REFERENCES recipe(id) NOT NULL,
+    recipe_id INTEGER REFERENCES recipeGuide(id) NOT NULL,
     ingredient_id INTEGER REFERENCES ingredient(id) NOT NULL,
     amount INTEGER NOT NULL,
     unit VARCHAR(80) NOT NULL
