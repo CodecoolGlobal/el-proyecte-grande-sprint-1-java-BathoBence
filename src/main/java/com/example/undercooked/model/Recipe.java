@@ -1,6 +1,9 @@
 package com.example.undercooked.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CollectionType;
+
+import java.util.List;
 
 @Entity
 public class Recipe {
@@ -16,6 +19,7 @@ public class Recipe {
     @JoinColumn(name = "ingredienty_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_recipeingredient_ingredient"))
     private Ingredient ingredient;
 
+    private List<IngredientTest> ingredientList;
     private double amount;
     private String unit;
 
