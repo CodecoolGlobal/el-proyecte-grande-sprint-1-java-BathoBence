@@ -1,11 +1,11 @@
 package com.example.undercooked.controller;
 
+import com.example.undercooked.dto.RecipeInfoDTO;
 import com.example.undercooked.model.Recipe;
 import com.example.undercooked.service.RecipeServie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,9 +29,9 @@ public class RecipeController {
         return ResponseEntity.ok(recipes);
     }
 
-    @GetMapping("/cica")
+    @GetMapping("/recipes/byingredients")
     public ResponseEntity<?> getRecipesByIngredient() {
-        List<Recipe> recipes = recipeServie.getRecipiesByIngredients();
+        List<RecipeInfoDTO> recipes = recipeServie.getRecipesByIngredients();
         return ResponseEntity.ok(recipes);
     }
 

@@ -1,5 +1,6 @@
 package com.example.undercooked.service;
 
+import com.example.undercooked.dto.RecipeInfoDTO;
 import com.example.undercooked.model.Recipe;
 import com.example.undercooked.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,19 @@ public class RecipeServie {
         return recipeRepository.findAll();
     }
 
-    public List<Recipe> getRecipiesByIngredients() {
+    public List<RecipeInfoDTO> getRecipesByIngredients() {
 
-        return recipeRepository.getRecipesByIngredients("Spaghetti", "Large Eggs", "Parmesan Cheese", "Pancetta",
-                "Boneless Chicken Breast",
-                "Broccoli",
-                "Soy Sauce");
+        List<Recipe> recipes = recipeRepository.getRecipesByIngredients(
+                "Spaghetti", "Large Eggs", "Parmesan Cheese", "Pancetta", "Boneless Chicken Breast",
+                "Broccoli", "Soy Sauce");
+
+        return getRecipeInfoDTOS(recipes);
+
     }
+
+    private List<RecipeInfoDTO> getRecipeInfoDTOS(List<Recipe> recipes) {
+        return recipes.stream().map(RecipeInfoDTO::new).toList();
+    }
+
 
 }
