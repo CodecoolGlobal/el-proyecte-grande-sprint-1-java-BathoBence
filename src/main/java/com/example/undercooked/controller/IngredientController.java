@@ -3,7 +3,6 @@ package com.example.undercooked.controller;
 import com.example.undercooked.model.Ingredient;
 import com.example.undercooked.service.IngredientProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +19,6 @@ public class IngredientController {
     }
     @GetMapping("/ingredients")
     public Set<Ingredient> getMain() {
-        return ingredientProvider.getAllIngredients();
+        return null;
     }
 }
