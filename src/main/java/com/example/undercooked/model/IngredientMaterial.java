@@ -1,4 +1,4 @@
-package com.example.undercooked.model.test;
+package com.example.undercooked.model;
 
 import jakarta.persistence.*;
 

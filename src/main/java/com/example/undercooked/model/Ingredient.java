@@ -3,32 +3,37 @@ package com.example.undercooked.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Ingredient{
+public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    @Column(unique = true)
-    private String name;
-    @ManyToOne
-    @JoinColumn(name = "food_category_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_ingredient_foodcategory"))
-    private FoodCategory foodCategory;
 
-    public Ingredient(String name, FoodCategory foodCategory) {
-        this.name = name;
-        this.foodCategory = foodCategory;
+    @ManyToOne
+    @JoinColumn(name = "ingredientmaterial_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_ingredient_ingredientmaterial"))
+    private IngredientMaterial material;
+    private double amount;
+    private String unit;
+
+    public Ingredient(IngredientMaterial material, double amount, String unit) {
+        this.material = material;
+        this.amount = amount;
+        this.unit = unit;
     }
 
     public Ingredient() {
+
     }
 
-    public long getId() {
-        return id;
+    public IngredientMaterial getMaterial() {
+        return material;
     }
-    public String getName() {
-        return name;
+
+    public double getAmount() {
+        return amount;
     }
-    public FoodCategory getFoodCategory() {
-        return foodCategory;
+
+    public String getUnit() {
+        return unit;
     }
 }
