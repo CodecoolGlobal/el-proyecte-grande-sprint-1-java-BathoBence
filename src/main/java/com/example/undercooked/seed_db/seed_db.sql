@@ -1,4 +1,3 @@
--- Insert data into the food_category table
 -- Delete all data from the recipe_ingredients table
 DELETE FROM recipe_ingredients;
 
@@ -14,7 +13,7 @@ DELETE FROM ingredient_material;
 -- Delete all data from the food_category table
 DELETE FROM food_category;
 
-
+-- Insert data into the food_category table
 INSERT INTO food_category (id, "name") VALUES
                                          (1, 'Pasta'),
                                          (2, 'Eggs'),
