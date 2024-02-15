@@ -16,8 +16,9 @@ public class RecipeService {
         this.recipeRepository = recipeRepository;
     }
 
-    public List<Recipe> getAllRecipe() {
-        return recipeRepository.findAll();
+    public List<RecipeInfoDTO> getAllRecipe() {
+        List<Recipe> allRecipe = recipeRepository.findAll();
+        return getRecipeInfoDTOS(allRecipe);
     }
 
     public Recipe getRecipeById(long id){
