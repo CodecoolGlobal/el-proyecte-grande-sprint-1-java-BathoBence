@@ -25,7 +25,7 @@ public class RecipeController {
 
     @GetMapping("/recipes/all")
     public ResponseEntity<?> getMain() {
-        List<Recipe> recipes = recipeServie.getAllRecipe();
+        List<RecipeInfoDTO> recipes = recipeService.getAllRecipe();
         return ResponseEntity.ok(recipes);
     }
 
