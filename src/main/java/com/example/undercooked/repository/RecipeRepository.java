@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
+    Recipe getRecipeById(long id);
+
     @Query(value = "WITH recipe_materials AS (\n" +
             "SELECT r.id, COUNT(im.id) AS material_count FROM recipe r\n" +
             "JOIN recipe_ingredients ri ON r.id = ri.recipe_id\n" +

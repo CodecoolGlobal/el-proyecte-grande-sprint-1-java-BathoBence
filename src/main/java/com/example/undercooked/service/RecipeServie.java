@@ -19,6 +19,10 @@ public class RecipeServie {
         return recipeRepository.findAll();
     }
 
+    public Recipe getRecipeById(long id){
+        return recipeRepository.getRecipeById(id);
+    }
+
     public List<Recipe> getRecipiesByIngredients() {
 
         return recipeRepository.getRecipesByIngredients("Spaghetti", "Large Eggs", "Parmesan Cheese", "Pancetta",
