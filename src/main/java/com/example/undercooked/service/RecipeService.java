@@ -8,16 +8,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RecipeServie {
+public class RecipeService {
 
     private RecipeRepository recipeRepository;
 
-    public RecipeServie(RecipeRepository recipeRepository) {
+    public RecipeService(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
 
     public List<Recipe> getAllRecipe() {
         return recipeRepository.findAll();
+    }
+
+    public Recipe getRecipeById(long id){
+        return recipeRepository.getRecipeById(id);
     }
 
     public List<RecipeInfoDTO> getRecipesByIngredients() {
@@ -27,7 +31,6 @@ public class RecipeServie {
                 "Broccoli", "Soy Sauce");
 
         return getRecipeInfoDTOS(recipes);
-
     }
 
     private List<RecipeInfoDTO> getRecipeInfoDTOS(List<Recipe> recipes) {
