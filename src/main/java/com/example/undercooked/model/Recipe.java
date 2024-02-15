@@ -12,15 +12,17 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
-
+    private String description;
+    @Column(columnDefinition = "TEXT")
+    private String guide;
     //need lazy something,
     @OneToMany
     private List<Ingredient> ingredients;
-    private String description;
 
-    public Recipe(String description, String name) {
+    public Recipe(String description, String name, String guide) {
         this.description = description;
         this.name = name;
+        this.guide = guide;
     }
 
     public Recipe() {
@@ -44,5 +46,9 @@ public class Recipe {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getGuide() {
+        return guide;
     }
 }

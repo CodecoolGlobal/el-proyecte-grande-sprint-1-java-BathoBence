@@ -27,7 +27,6 @@ public class RecipeServie {
                 "Broccoli", "Soy Sauce");
 
         return getRecipeInfoDTOS(recipes);
-
     }
 
     private List<RecipeInfoDTO> getRecipeInfoDTOS(List<Recipe> recipes) {

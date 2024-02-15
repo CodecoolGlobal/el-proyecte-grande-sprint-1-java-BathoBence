@@ -69,12 +69,12 @@ INSERT INTO ingredient_material (food_category_id, id, name) VALUES
 (16, 32, 'Brown Rice');
 
 -- Insert data into the recipe table
-INSERT INTO recipe (id, name, description) VALUES
-                                           (1, 'Spaghetti Carbonara', 'Classic Italian pasta dish with eggs, cheese, and pancetta.'),
-                                           (2, 'Chicken Stir-Fry', 'Quick and easy stir-fry with chicken, vegetables, and soy sauce.'),
-                                           (3, 'Caprese Salad', 'Refreshing salad made with tomatoes, mozzarella, basil, and balsamic vinegar.'),
-                                           (4, 'Grilled Salmon', 'Healthy and flavorful grilled salmon seasoned with lemon and herbs.'),
-                                           (5, 'Vegetable Curry', 'Vegetarian curry packed with colorful vegetables and aromatic spices.');
+INSERT INTO recipe (id, name, description, guide) VALUES
+                                           (1, 'Spaghetti Carbonara', 'Classic Italian pasta dish with eggs, cheese, and pancetta.', 'Sed vitae dictum eros. Aliquam diam felis, facilisis id risus non, elementum luctus augue. Curabitur egestas diam eu eleifend convallis. Aliquam erat volutpat. Aenean eget lectus id nisi cursus dignissim ac ut urna. Morbi non mi elit. Nam nibh leo, posuere in mi eget, pulvinar volutpat felis.'),
+                                           (2, 'Chicken Stir-Fry', 'Quick and easy stir-fry with chicken, vegetables, and soy sauce.', 'Sed vitae dictum eros. Aliquam diam felis, facilisis id risus non, elementum luctus augue. Curabitur egestas diam eu eleifend convallis. Aliquam erat volutpat. Aenean eget lectus id nisi cursus dignissim ac ut urna. Morbi non mi elit. Nam nibh leo, posuere in mi eget, pulvinar volutpat felis.'),
+                                           (3, 'Caprese Salad', 'Refreshing salad made with tomatoes, mozzarella, basil, and balsamic vinegar.', 'Sed vitae dictum eros. Aliquam diam felis, facilisis id risus non, elementum luctus augue. Curabitur egestas diam eu eleifend convallis. Aliquam erat volutpat. Aenean eget lectus id nisi cursus dignissim ac ut urna. Morbi non mi elit. Nam nibh leo, posuere in mi eget, pulvinar volutpat felis.'),
+                                           (4, 'Grilled Salmon', 'Healthy and flavorful grilled salmon seasoned with lemon and herbs.', 'Sed vitae dictum eros. Aliquam diam felis, facilisis id risus non, elementum luctus augue. Curabitur egestas diam eu eleifend convallis. Aliquam erat volutpat. Aenean eget lectus id nisi cursus dignissim ac ut urna. Morbi non mi elit. Nam nibh leo, posuere in mi eget, pulvinar volutpat felis.'),
+                                           (5, 'Vegetable Curry', 'Vegetarian curry packed with colorful vegetables and aromatic spices.', 'Sed vitae dictum eros. Aliquam diam felis, facilisis id risus non, elementum luctus augue. Curabitur egestas diam eu eleifend convallis. Aliquam erat volutpat. Aenean eget lectus id nisi cursus dignissim ac ut urna. Morbi non mi elit. Nam nibh leo, posuere in mi eget, pulvinar volutpat felis.');
 
 -- Insert data into the ingredient table
 INSERT INTO ingredient (id, amount, ingredientmaterial_id, unit) VALUES
