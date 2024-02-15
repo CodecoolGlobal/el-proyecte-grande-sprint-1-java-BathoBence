@@ -2,7 +2,7 @@ package com.example.undercooked.controller;
 
 import com.example.undercooked.dto.RecipeInfoDTO;
 import com.example.undercooked.model.Recipe;
-import com.example.undercooked.service.RecipeServie;
+import com.example.undercooked.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,29 +16,29 @@ import java.util.List;
 @RequestMapping("/api")
 public class RecipeController {
 
-    private RecipeServie recipeServie;
+    private RecipeService recipeService;
 
     @Autowired
-    public RecipeController(RecipeServie recipeServie) {
-        this.recipeServie = recipeServie;
+    public RecipeController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @GetMapping("/main")
     public ResponseEntity<?> getMain() {
-        List<Recipe> recipes = recipeServie.getAllRecipe();
+        List<Recipe> recipes = recipeService.getAllRecipe();
         System.out.println(recipes.toString());
         return ResponseEntity.ok(recipes);
     }
 
     @GetMapping("/recipes/byingredients")
     public ResponseEntity<?> getRecipesByIngredient() {
-        List<RecipeInfoDTO> recipes = recipeServie.getRecipesByIngredients();
+        List<RecipeInfoDTO> recipes = recipeService.getRecipesByIngredients();
         return ResponseEntity.ok(recipes);
     }
 
     @GetMapping("/recipes/{id}")
     public Recipe getRecipeById(@PathVariable long id){
-        return recipeServie.getRecipeById(id);
+        return recipeService.getRecipeById(id);
     }
 
 }
