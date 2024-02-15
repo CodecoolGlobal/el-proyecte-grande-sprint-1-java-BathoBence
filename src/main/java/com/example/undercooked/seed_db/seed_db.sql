@@ -66,7 +66,15 @@ INSERT INTO ingredient_material (food_category_id, id, name) VALUES
 (15, 29, 'Yellow Curry Powder'),
 (15, 30, 'Red Curry Paste'),
 (16, 31, 'White Rice'),
-(16, 32, 'Brown Rice');
+(16, 32, 'Brown Rice'),
+(6,33,'Nyersratyli'),
+(6,34,'Pese'),
+(6,35,'Gönyézde'),
+(6,36,'Cihánta'),
+(6,37,'Csikmány'),
+(6,38,'Zamecsli'),
+(6,39,'Petrecel'),
+(6,40,'Vatyek');
 
 -- Insert data into the recipe table
 INSERT INTO recipe (id, name, description, guide) VALUES
@@ -74,7 +82,8 @@ INSERT INTO recipe (id, name, description, guide) VALUES
                                            (2, 'Chicken Stir-Fry', 'Quick and easy stir-fry with chicken, vegetables, and soy sauce.', 'Sed vitae dictum eros. Aliquam diam felis, facilisis id risus non, elementum luctus augue. Curabitur egestas diam eu eleifend convallis. Aliquam erat volutpat. Aenean eget lectus id nisi cursus dignissim ac ut urna. Morbi non mi elit. Nam nibh leo, posuere in mi eget, pulvinar volutpat felis.'),
                                            (3, 'Caprese Salad', 'Refreshing salad made with tomatoes, mozzarella, basil, and balsamic vinegar.', 'Sed vitae dictum eros. Aliquam diam felis, facilisis id risus non, elementum luctus augue. Curabitur egestas diam eu eleifend convallis. Aliquam erat volutpat. Aenean eget lectus id nisi cursus dignissim ac ut urna. Morbi non mi elit. Nam nibh leo, posuere in mi eget, pulvinar volutpat felis.'),
                                            (4, 'Grilled Salmon', 'Healthy and flavorful grilled salmon seasoned with lemon and herbs.', 'Sed vitae dictum eros. Aliquam diam felis, facilisis id risus non, elementum luctus augue. Curabitur egestas diam eu eleifend convallis. Aliquam erat volutpat. Aenean eget lectus id nisi cursus dignissim ac ut urna. Morbi non mi elit. Nam nibh leo, posuere in mi eget, pulvinar volutpat felis.'),
-                                           (5, 'Vegetable Curry', 'Vegetarian curry packed with colorful vegetables and aromatic spices.', 'Sed vitae dictum eros. Aliquam diam felis, facilisis id risus non, elementum luctus augue. Curabitur egestas diam eu eleifend convallis. Aliquam erat volutpat. Aenean eget lectus id nisi cursus dignissim ac ut urna. Morbi non mi elit. Nam nibh leo, posuere in mi eget, pulvinar volutpat felis.');
+                                           (5, 'Vegetable Curry', 'Vegetarian curry packed with colorful vegetables and aromatic spices.', 'Sed vitae dictum eros. Aliquam diam felis, facilisis id risus non, elementum luctus augue. Curabitur egestas diam eu eleifend convallis. Aliquam erat volutpat. Aenean eget lectus id nisi cursus dignissim ac ut urna. Morbi non mi elit. Nam nibh leo, posuere in mi eget, pulvinar volutpat felis.'),
+                                           (6, 'Tüttyölt Ratyni', 'Betestesítve betöl tőle a bélés. Elgyaratolva minket, és látván tányérunk fogyatékát, jobb, ha elgunnyad az embör.', 'A nyersratylit fertályórát posvásztjuk a gönyézdével, míg csurmot nem ereszt, közben a vatyekot megdicsikicseljük. Szépen höllyén megpicskázzuk, a nyesedékből pedig apró csulmákat gyúrunk, ezek kerülnek a koshadtba. Közben a pocadékot megpeccsentjük, a ratylit pedig hagyjuk slottyanni. Tüttyölni csak akkor kezdjük, ha már jó vatyálós. A pesét lesolyvasztjuk, aztán már csak röttyengetjük, mert hamar odakaphat. Végül a suttyonyos petrecelt belebibározzuk a 4 ölej csikmányba, majd jól összegyöröszjézzük. Várunk, amíg a széle be nem tockosodik és rádurungoljuk a cihátát.');
 
 -- Insert data into the ingredient table
 INSERT INTO ingredient (id, amount, ingredientmaterial_id, unit) VALUES
@@ -95,7 +104,15 @@ INSERT INTO ingredient (id, amount, ingredientmaterial_id, unit) VALUES
 (14, 15, 27, 'grams'), -- 15 grams of Fresh Herbs
 (15, 2, 29, 'tablespoons'), -- 2 tablespoons of Yellow Curry Powder
 (16, 3, 29, 'tablespoons'), -- 2 tablespoons of Yellow Curry Powder
-(17, 4, 29, 'tablespoons'); -- 2 tablespoons of Yellow Curry Powder
+(17, 4, 29, 'tablespoons'),
+(18,1,33,'kilogram'),
+(19,1,34,'jókora'),
+(20,2,35,'csobolyó'),
+(21,3,36,'csipet'),
+(22,4,37,'ölej'),
+(23,5,38,'darab'),
+(24,1,39,'suttyonyos'),
+(25,1,40,'véka'); -- 2 tablespoons of Yellow Curry Powder
 
 
 -- Insert data into the recipe_ingredients table
@@ -117,4 +134,12 @@ INSERT INTO recipe_ingredients (recipe_id, ingredients_id) VALUES
 (4, 14), -- Grilled Salmon with Fresh Herbs
 (5, 15), -- Vegetable Curry with Yellow Curry Powder
 (4, 16), -- Vegetable Curry with Yellow Curry Powder
-(3, 17); -- Vegetable Curry with Yellow Curry Powder
+(3, 17),
+(6,18),
+(6,19),
+(6,20),
+(6,21),
+(6,22),
+(6,23),
+(6,24),
+(6,25); -- Vegetable Curry with Yellow Curry Powder
