@@ -22,10 +22,9 @@ public class RecipeController {
         this.recipeServie = recipeServie;
     }
 
-    @GetMapping("/main")
+    @GetMapping("/recipes/all")
     public ResponseEntity<?> getMain() {
         List<Recipe> recipes = recipeServie.getAllRecipe();
-        System.out.println(recipes.toString());
         return ResponseEntity.ok(recipes);
     }
 
