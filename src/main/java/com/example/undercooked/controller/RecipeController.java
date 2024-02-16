@@ -12,8 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/*
+ * GET /api/recipies <-- List all
+ * GET /api/recipies/:id <-- get one
+ * POST /api/recipies <-- add
+ * PATCH /api/recipies/:id <-- update one
+ * DELETE /api/recipies/:id <-- delete one
+ * 
+ */
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/recipies")
 public class RecipeController {
 
     private RecipeService recipeService;
@@ -23,7 +32,7 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @GetMapping("/recipes/all")
+    @GetMapping("/")
     public ResponseEntity<?> getMain() {
         List<RecipeInfoDTO> recipes = recipeService.getAllRecipe();
         return ResponseEntity.ok(recipes);
@@ -35,7 +44,7 @@ public class RecipeController {
         return ResponseEntity.ok(recipes);
     }
 
-    @GetMapping("/recipes/{id}")
+    @GetMapping("/{id}")
     public Recipe getRecipeById(@PathVariable long id){
         return recipeService.getRecipeById(id);
     }

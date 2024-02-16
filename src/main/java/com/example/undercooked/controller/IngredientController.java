@@ -17,8 +17,11 @@ public class IngredientController {
     public IngredientController(IngredientProvider ingredientProvider) {
         this.ingredientProvider = ingredientProvider;
     }
+    
     @GetMapping("/ingredients")
     public Set<Ingredient> getMain() {
         return null;
     }
+    
+
 }
