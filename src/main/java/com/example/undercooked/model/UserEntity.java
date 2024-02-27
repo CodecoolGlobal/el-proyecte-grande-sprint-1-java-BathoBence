@@ -3,7 +3,9 @@ package com.example.undercooked.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class UserEntity {
@@ -16,6 +18,8 @@ public class UserEntity {
     private String emailAddress;
     @Column(nullable = false)
     private String password;
+
+    private Set<Role> roles;
     @OneToMany
     private List<Ingredient> ingredients;
 
@@ -24,6 +28,7 @@ public class UserEntity {
         this.emailAddress = emailAddress;
         this.password = password;
         this.ingredients = new ArrayList<>();
+        this.roles = new HashSet<>();
     }
 
     public UserEntity() {
@@ -39,6 +44,18 @@ public class UserEntity {
 
     public String getEmailAddress() {
         return emailAddress;
+    }
+
+    public Set<Role> getRoles() {
+        return new HashSet<>(roles);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean add(Role role) {
+        return roles.add(role);
     }
 
     public List<Ingredient> getPantry() {
