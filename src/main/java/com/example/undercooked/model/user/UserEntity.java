@@ -1,5 +1,6 @@
-package com.example.undercooked.model;
+package com.example.undercooked.model.user;
 
+import com.example.undercooked.model.Ingredient;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

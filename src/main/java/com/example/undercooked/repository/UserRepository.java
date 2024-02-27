@@ -1,6 +1,6 @@
 package com.example.undercooked.repository;
 
-import com.example.undercooked.model.UserEntity;
+import com.example.undercooked.model.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
