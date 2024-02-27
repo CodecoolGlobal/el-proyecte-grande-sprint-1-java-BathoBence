@@ -1,4 +1,4 @@
-package com.example.undercooked.model;
+package com.example.undercooked.model.user;
 
 public enum Role {
     ROLE_USER,

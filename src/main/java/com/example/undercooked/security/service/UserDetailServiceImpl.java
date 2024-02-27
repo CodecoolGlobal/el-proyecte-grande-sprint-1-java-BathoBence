@@ -1,7 +1,7 @@
 package com.example.undercooked.security.service;
 
-import com.example.undercooked.model.Role;
-import com.example.undercooked.model.UserEntity;
+import com.example.undercooked.model.user.Role;
+import com.example.undercooked.model.user.UserEntity;
 import com.example.undercooked.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
