@@ -75,4 +75,18 @@ public class UserController {
         return ResponseEntity.ok(userPantry);
     }
 
+    @PostMapping("/pantry")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> addPantryItem(HttpServletRequest request, @RequestBody NewPantryItemRequest pantryItemRequest) {
+        String token = null;
+        for (Cookie cookie : request.getCookies()) {
+
+            if (cookie.getName().equals("accessToken")) {
+                token = cookie.getValue();
+            }
+        }
+        String userName = jwtUtils.getUserNameForJwtToken(token);
+        userService.addPantryItem(userName, pantryItemRequest);
+        return ResponseEntity.ok("");
+    }
 }
