@@ -24,12 +24,12 @@ public class UserService {
         }
     }
 
-    public List<PantryItem> getPantryItemsByUserId(long id) {
-        if (userRepository.getUserEntityById(id).isPresent()) {
-            UserEntity user = userRepository.getUserEntityById(id).get();
+    public List<PantryItem> getPantryItemsByUserId(String userName) {
+        if (userRepository.getUserEntityByName(userName).isPresent()) {
+            UserEntity user = userRepository.getUserEntityByName(userName).get();
             return user.getPantry();
         } else {
-            throw new IllegalArgumentException((String.format("User not found by userId: %s", id)));
+            throw new IllegalArgumentException((String.format("User not found: %s", userName)));
         }
 
     }
