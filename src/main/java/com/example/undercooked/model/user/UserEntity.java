@@ -1,6 +1,7 @@
 package com.example.undercooked.model.user;
 
 import com.example.undercooked.model.Ingredient;
+import com.example.undercooked.model.PantryItem;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -22,13 +23,13 @@ public class UserEntity {
 
     private Set<Role> roles;
     @OneToMany
-    private List<Ingredient> ingredients;
+    private List<PantryItem> pantryItems;
 
     public UserEntity(String name, String emailAddress, String password) {
         this.name = name;
         this.emailAddress = emailAddress;
         this.password = password;
-        this.ingredients = new ArrayList<>();
+        this.pantryItems = new ArrayList<>();
         this.roles = new HashSet<>();
     }
 
@@ -55,11 +56,15 @@ public class UserEntity {
         return password;
     }
 
-    public boolean add(Role role) {
+    public boolean addRole(Role role) {
         return roles.add(role);
     }
 
-    public List<Ingredient> getPantry() {
-        return new ArrayList<>(ingredients);
+    public List<PantryItem> getPantry() {
+        return new ArrayList<>(this.pantryItems);
+    }
+
+    public boolean addPantryItem(PantryItem pantryItem) {
+        return pantryItems.add(pantryItem);
     }
 }

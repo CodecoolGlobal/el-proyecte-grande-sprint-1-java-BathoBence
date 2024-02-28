@@ -34,7 +34,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
@@ -51,9 +51,9 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/api/user/**").permitAll()
-                                .requestMatchers("/error").permitAll()
-                                .anyRequest().authenticated())
+                        .requestMatchers("/api/user/**").permitAll()
+                        .requestMatchers("/error").permitAll()
+                        .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
@@ -73,8 +73,6 @@ public class WebSecurityConfig {
     public Filter authenticationJwtTokenFilter() {
         return new AuthTokenFilter(jwtUtils, userDetailService);
     }
-
-    
 
 
 }
