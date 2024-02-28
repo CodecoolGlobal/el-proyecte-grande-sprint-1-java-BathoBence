@@ -1,12 +1,11 @@
 package com.example.undercooked.controller;
 
 import com.example.undercooked.model.PantryItem;
-import com.example.undercooked.model.user.JwtResponse;
-import com.example.undercooked.model.user.LoginRequest;
-import com.example.undercooked.model.user.UserEntity;
-import com.example.undercooked.model.user.UserRequest;
+import com.example.undercooked.model.user.*;
 import com.example.undercooked.security.jwt.JwtUtils;
 import com.example.undercooked.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,6 +38,7 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<Void> createUser(@RequestBody UserRequest request) {
         UserEntity user = new UserEntity(request.name(), request.email(), encoder.encode(request.password()));
+        user.addRole(Role.ROLE_USER);
         userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -59,10 +59,20 @@ public class UserController {
     }
 
 
-    @GetMapping("/{id}/pantry")
+    @GetMapping("/pantry")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> getPantryByUserId(@PathVariable long id) {
-        List<PantryItem> userPantry = userService.getPantryItemsByUserId(id);
-        return ResponseEntity.ok("");
+    public ResponseEntity<?> getPantryByUser(HttpServletRequest request) {
+        String token = null;
+        for (Cookie cookie : request.getCookies()) {
+
+            if (cookie.getName().equals("accessToken")) {
+                token = cookie.getValue();
+            }
+        }
+        String userName = jwtUtils.getUserNameForJwtToken(token);
+
+        List<PantryItem> userPantry = userService.getPantryItemsByUserId(userName);
+        return ResponseEntity.ok(userPantry);
     }
+
 }
