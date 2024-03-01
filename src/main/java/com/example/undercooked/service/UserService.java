@@ -48,11 +48,10 @@ public class UserService {
         PantryItem newPantryItem = new PantryItem(ingredientMaterial, pantryItemRequest.amount(), pantryItemRequest.unit());
         pantryItemRepository.save(newPantryItem);
 
-        if(userRepository.getUserEntityByName(userName).isPresent()) {
+        if (userRepository.getUserEntityByName(userName).isPresent()) {
             UserEntity user = userRepository.getUserEntityByName(userName).get();
             user.addPantryItem(newPantryItem);
             userRepository.save(user);
         }
-
     }
 }
