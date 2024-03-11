@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -58,19 +59,23 @@ public class UserController {
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), roles));
     }
 
+    private String extractTokenFromRequest(HttpServletRequest request) {
+        Optional<Cookie> accessTokenCookie = Optional.ofNullable(request.getCookies())
+                .flatMap(cookies ->
+                        List.of(cookies)
+                                .stream()
+                                .filter(cookie -> cookie.getName().equals("accessToken"))
+                                .findFirst());
+
+        return accessTokenCookie.map(Cookie::getValue).orElse(null);
+    }
+
 
     @GetMapping("/pantry")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> getPantryByUser(HttpServletRequest request) {
-        String token = null;
-        for (Cookie cookie : request.getCookies()) {
-
-            if (cookie.getName().equals("accessToken")) {
-                token = cookie.getValue();
-            }
-        }
+        String token = extractTokenFromRequest(request);
         String userName = jwtUtils.getUserNameForJwtToken(token);
-
         List<PantryItem> userPantry = userService.getPantryItemsByUserId(userName);
         return ResponseEntity.ok(userPantry);
     }
@@ -78,13 +83,7 @@ public class UserController {
     @PostMapping("/pantry")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> addPantryItem(HttpServletRequest request, @RequestBody NewPantryItemRequest pantryItemRequest) {
-        String token = null;
-        for (Cookie cookie : request.getCookies()) {
-
-            if (cookie.getName().equals("accessToken")) {
-                token = cookie.getValue();
-            }
-        }
+        String token = extractTokenFromRequest(request);
         String userName = jwtUtils.getUserNameForJwtToken(token);
         userService.addPantryItem(userName, pantryItemRequest);
         return ResponseEntity.ok("");
