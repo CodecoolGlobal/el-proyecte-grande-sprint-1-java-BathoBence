@@ -60,13 +60,23 @@ public class UserController {
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), roles));
     }
 
+    private String extractTokenFromRequest(HttpServletRequest request) {
+        Optional<Cookie> accessTokenCookie = Optional.ofNullable(request.getCookies())
+                .flatMap(cookies ->
+                        List.of(cookies)
+                                .stream()
+                                .filter(cookie -> cookie.getName().equals("accessToken"))
+                                .findFirst());
+
+        return accessTokenCookie.map(Cookie::getValue).orElse(null);
+    }
+
 
     @GetMapping("/pantry")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> getPantryByUser(HttpServletRequest request) {
-        String token = extractToken(request);
+        String token = extractTokenFromRequest(request);
         String userName = jwtUtils.getUserNameForJwtToken(token);
-
         List<PantryItem> userPantry = userService.getPantryItemsByUserId(userName);
         return ResponseEntity.ok(userPantry);
     }
@@ -74,18 +84,10 @@ public class UserController {
     @PostMapping("/pantry")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> addPantryItem(HttpServletRequest request, @RequestBody NewPantryItemRequest pantryItemRequest) {
-        String token = extractToken(request);
+        String token = extractTokenFromRequest(request);
         String userName = jwtUtils.getUserNameForJwtToken(token);
         userService.addPantryItem(userName, pantryItemRequest);
         return ResponseEntity.ok("");
     }
 
-    private String extractToken(HttpServletRequest request) {
-        Optional<Cookie> tokenCookie = Optional.ofNullable(request.getCookies())
-                .flatMap(cookies ->
-                        Arrays.stream(cookies)
-                                .filter(cookie -> "accessToken".equals(cookie.getName()))
-                                .findFirst());
-        return tokenCookie.map(Cookie::getValue).orElse(null);
-    }
 }
