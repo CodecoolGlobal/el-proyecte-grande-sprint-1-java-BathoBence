@@ -18,7 +18,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user")
@@ -62,13 +64,7 @@ public class UserController {
     @GetMapping("/pantry")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> getPantryByUser(HttpServletRequest request) {
-        String token = null;
-        for (Cookie cookie : request.getCookies()) {
-
-            if (cookie.getName().equals("accessToken")) {
-                token = cookie.getValue();
-            }
-        }
+        String token = extractToken(request);
         String userName = jwtUtils.getUserNameForJwtToken(token);
 
         List<PantryItem> userPantry = userService.getPantryItemsByUserId(userName);
@@ -78,15 +74,18 @@ public class UserController {
     @PostMapping("/pantry")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> addPantryItem(HttpServletRequest request, @RequestBody NewPantryItemRequest pantryItemRequest) {
-        String token = null;
-        for (Cookie cookie : request.getCookies()) {
-
-            if (cookie.getName().equals("accessToken")) {
-                token = cookie.getValue();
-            }
-        }
+        String token = extractToken(request);
         String userName = jwtUtils.getUserNameForJwtToken(token);
         userService.addPantryItem(userName, pantryItemRequest);
         return ResponseEntity.ok("");
+    }
+
+    private String extractToken(HttpServletRequest request) {
+        Optional<Cookie> tokenCookie = Optional.ofNullable(request.getCookies())
+                .flatMap(cookies ->
+                        Arrays.stream(cookies)
+                                .filter(cookie -> "accessToken".equals(cookie.getName()))
+                                .findFirst());
+        return tokenCookie.map(Cookie::getValue).orElse(null);
     }
 }
