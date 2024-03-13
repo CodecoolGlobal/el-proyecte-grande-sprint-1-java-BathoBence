@@ -67,7 +67,6 @@ public class UserService {
 
     public List<RecipeInfoDTO> getAvailableRecipesBasedOnUserPantryItems(String userName){
         List<PantryItem> userPantryItems = getPantryItemsByUserName(userName);
-        System.out.println("*******************************");
         return recipeService.getRecipesByUserPantryItems(userPantryItems);
     }
 }
