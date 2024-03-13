@@ -28,12 +28,12 @@ public class RecipeController {
         List<RecipeInfoDTO> recipes = recipeService.getAllRecipe();
         return ResponseEntity.ok(recipes);
     }
-
+    /*
     @GetMapping("/byingredients")
     public ResponseEntity<?> getRecipesByIngredient() {
         List<RecipeInfoDTO> recipes = recipeService.getRecipesByIngredients();
         return ResponseEntity.ok(recipes);
-    }
+    } */
 
     @GetMapping("/{id}")
     public Recipe getRecipeById(@PathVariable long id){

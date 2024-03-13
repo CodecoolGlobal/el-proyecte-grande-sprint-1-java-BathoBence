@@ -1,6 +1,8 @@
 package com.example.undercooked.controller;
 
+import com.example.undercooked.dto.RecipeInfoDTO;
 import com.example.undercooked.model.PantryItem;
+import com.example.undercooked.model.Recipe;
 import com.example.undercooked.model.user.*;
 import com.example.undercooked.security.jwt.JwtUtils;
 import com.example.undercooked.service.UserService;
@@ -18,7 +20,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,19 +76,31 @@ public class UserController {
     @GetMapping("/pantry")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> getPantryByUser(HttpServletRequest request) {
-        String token = extractTokenFromRequest(request);
-        String userName = jwtUtils.getUserNameForJwtToken(token);
-        List<PantryItem> userPantry = userService.getPantryItemsByUserId(userName);
+        String userName = getUserNameFromToken(request);
+        List<PantryItem> userPantry = userService.getPantryItemsByUserName(userName);
         return ResponseEntity.ok(userPantry);
     }
 
     @PostMapping("/pantry")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> addPantryItem(HttpServletRequest request, @RequestBody NewPantryItemRequest pantryItemRequest) {
-        String token = extractTokenFromRequest(request);
-        String userName = jwtUtils.getUserNameForJwtToken(token);
+        String userName = getUserNameFromToken(request);
         userService.addPantryItem(userName, pantryItemRequest);
         return ResponseEntity.ok("");
+    }
+
+    @GetMapping("/recipes")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> getAvailableRecipesBasedOnUserPantryItems(HttpServletRequest request){
+        String userName = getUserNameFromToken(request);
+        List<RecipeInfoDTO> recipes = userService.getAvailableRecipesBasedOnUserPantryItems(userName);
+
+        return ResponseEntity.ok(recipes);
+    }
+
+    private String getUserNameFromToken(HttpServletRequest request){
+        String token = extractTokenFromRequest(request);
+        return jwtUtils.getUserNameForJwtToken(token);
     }
 
 }
