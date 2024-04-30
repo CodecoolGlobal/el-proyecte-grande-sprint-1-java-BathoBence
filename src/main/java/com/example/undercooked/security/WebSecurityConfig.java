@@ -24,10 +24,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class WebSecurityConfig {
 
-    private UserDetailsService userDetailService;
-    private JwtUtils jwtUtils;
-    private AuthEntryPointJwt unauthorizedHandler;
+    private final UserDetailsService userDetailService;
+    private final JwtUtils jwtUtils;
+    private final AuthEntryPointJwt unauthorizedHandler;
 
+    @Autowired
     public WebSecurityConfig(UserDetailsService userDetailService, JwtUtils jwtUtils, AuthEntryPointJwt unauthorizedHandler) {
         this.userDetailService = userDetailService;
         this.jwtUtils = jwtUtils;

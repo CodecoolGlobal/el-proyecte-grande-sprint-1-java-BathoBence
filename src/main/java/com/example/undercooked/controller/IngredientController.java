@@ -13,10 +13,12 @@ import java.util.List;
 @RequestMapping("/api")
 public class IngredientController {
     private final IngredientProvider ingredientProvider;
+
     @Autowired
     public IngredientController(IngredientProvider ingredientProvider) {
         this.ingredientProvider = ingredientProvider;
     }
+
     @GetMapping("/ingredients")
     public List<IngredientMaterial> getAllIngredient() {
         return ingredientProvider.getAllIngredients();

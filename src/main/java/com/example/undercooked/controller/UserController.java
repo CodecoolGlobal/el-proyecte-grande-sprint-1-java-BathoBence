@@ -2,7 +2,6 @@ package com.example.undercooked.controller;
 
 import com.example.undercooked.dto.RecipeInfoDTO;
 import com.example.undercooked.model.PantryItem;
-import com.example.undercooked.model.Recipe;
 import com.example.undercooked.model.user.*;
 import com.example.undercooked.security.jwt.JwtUtils;
 import com.example.undercooked.service.UserService;
@@ -91,14 +90,14 @@ public class UserController {
 
     @GetMapping("/recipes")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> getAvailableRecipesBasedOnUserPantryItems(HttpServletRequest request){
+    public ResponseEntity<?> getAvailableRecipesBasedOnUserPantryItems(HttpServletRequest request) {
         String userName = getUserNameFromToken(request);
         List<RecipeInfoDTO> recipes = userService.getAvailableRecipesBasedOnUserPantryItems(userName);
 
         return ResponseEntity.ok(recipes);
     }
 
-    private String getUserNameFromToken(HttpServletRequest request){
+    private String getUserNameFromToken(HttpServletRequest request) {
         String token = extractTokenFromRequest(request);
         return jwtUtils.getUserNameForJwtToken(token);
     }

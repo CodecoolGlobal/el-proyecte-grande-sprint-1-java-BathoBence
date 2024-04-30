@@ -13,10 +13,6 @@ public class IngredientMaterial {
     @JoinColumn(name = "food_category_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_ingredientmaterial_foodcategory"))
     private FoodCategory foodCategory;
 
-    /*public IngredientMaterial(String name) {
-        this.name = name;
-    }*/
-
     public IngredientMaterial() {
 
     }

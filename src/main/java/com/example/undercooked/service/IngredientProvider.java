@@ -18,6 +18,7 @@ public class IngredientProvider {
     public IngredientProvider(IngredientMaterialRepository ingredientMaterialRepository) {
         this.ingredientMaterialRepository = ingredientMaterialRepository;
     }
+
     public List<IngredientMaterial> getAllIngredients() {
         return ingredientMaterialRepository.findAll().stream()
                 .sorted(Comparator.comparing(IngredientMaterial::getName))
