@@ -10,7 +10,13 @@ public class FoodCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-
     private String name;
 
+    public FoodCategory(String name) {
+        this.name = name;
+    }
+
+    public FoodCategory() {
+
+    }
 }

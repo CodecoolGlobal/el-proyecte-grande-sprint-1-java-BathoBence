@@ -8,10 +8,14 @@ public class IngredientMaterial {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
-
     @ManyToOne
     @JoinColumn(name = "food_category_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_ingredientmaterial_foodcategory"))
     private FoodCategory foodCategory;
+
+    public IngredientMaterial(String name, FoodCategory foodCategory) {
+        this.name = name;
+        this.foodCategory = foodCategory;
+    }
 
     public IngredientMaterial() {
 
