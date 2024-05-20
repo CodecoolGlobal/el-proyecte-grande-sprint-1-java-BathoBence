@@ -1,6 +1,5 @@
 package com.example.undercooked.model.user;
 
-import com.example.undercooked.model.Ingredient;
 import com.example.undercooked.model.PantryItem;
 import jakarta.persistence.*;
 

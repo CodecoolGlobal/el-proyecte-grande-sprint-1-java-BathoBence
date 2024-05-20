@@ -7,13 +7,12 @@ import com.example.undercooked.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class RecipeService {
 
-    private RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
 
     public RecipeService(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
@@ -24,25 +23,16 @@ public class RecipeService {
         return getRecipeInfoDTOS(allRecipe);
     }
 
-    public Recipe getRecipeById(long id){
+    public Recipe getRecipeById(long id) {
         return recipeRepository.getRecipeById(id);
     }
 
-   /* public List<RecipeInfoDTO> getRecipesByIngredients() {
-
-        List<Recipe> recipes = recipeRepository.getRecipesByIngredients(
-                "Spaghetti", "Large Eggs", "Parmesan Cheese", "Pancetta", "Boneless Chicken Breast",
-                "Broccoli", "Soy Sauce");
-
-        return getRecipeInfoDTOS(recipes);
-    } */
-
-    public List<RecipeInfoDTO> getRecipesByUserPantryItems(List<PantryItem> pantryItems){
+    public List<RecipeInfoDTO> getRecipesByUserPantryItems(List<PantryItem> pantryItems) {
         List<String> pantryItemNames = new ArrayList<>();
-        for(PantryItem item : pantryItems){
+        for (PantryItem item : pantryItems) {
             pantryItemNames.add(item.getMaterial().getName());
         }
-        List<Recipe> recipes =  recipeRepository.getRecipesByIngredients(pantryItemNames.toArray( new String[0]));
+        List<Recipe> recipes = recipeRepository.getRecipesByIngredients(pantryItemNames.toArray(new String[0]));
         return getRecipeInfoDTOS(recipes);
     }
 

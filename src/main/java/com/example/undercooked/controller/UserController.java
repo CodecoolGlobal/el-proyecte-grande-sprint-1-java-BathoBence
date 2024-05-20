@@ -2,7 +2,6 @@ package com.example.undercooked.controller;
 
 import com.example.undercooked.dto.RecipeInfoDTO;
 import com.example.undercooked.model.PantryItem;
-import com.example.undercooked.model.Recipe;
 import com.example.undercooked.model.user.*;
 import com.example.undercooked.security.jwt.JwtUtils;
 import com.example.undercooked.service.UserService;
@@ -47,7 +46,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+    public JwtResponse authenticateUser(@RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.name(), loginRequest.password())
         );
@@ -57,8 +56,9 @@ public class UserController {
 
         User userDetails = (User) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList();
+        JwtResponse response = new JwtResponse(jwt, userDetails.getUsername(), roles);
 
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), roles));
+        return response;
     }
 
     private String extractTokenFromRequest(HttpServletRequest request) {
@@ -75,10 +75,11 @@ public class UserController {
 
     @GetMapping("/pantry")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> getPantryByUser(HttpServletRequest request) {
+    public List<PantryItem> getPantryByUser(HttpServletRequest request) {
         String userName = getUserNameFromToken(request);
         List<PantryItem> userPantry = userService.getPantryItemsByUserName(userName);
-        return ResponseEntity.ok(userPantry);
+
+        return userPantry;
     }
 
     @PostMapping("/pantry")
@@ -91,14 +92,14 @@ public class UserController {
 
     @GetMapping("/recipes")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> getAvailableRecipesBasedOnUserPantryItems(HttpServletRequest request){
+    public List<RecipeInfoDTO> getAvailableRecipesBasedOnUserPantryItems(HttpServletRequest request) {
         String userName = getUserNameFromToken(request);
         List<RecipeInfoDTO> recipes = userService.getAvailableRecipesBasedOnUserPantryItems(userName);
 
-        return ResponseEntity.ok(recipes);
+        return recipes;
     }
 
-    private String getUserNameFromToken(HttpServletRequest request){
+    private String getUserNameFromToken(HttpServletRequest request) {
         String token = extractTokenFromRequest(request);
         return jwtUtils.getUserNameForJwtToken(token);
     }

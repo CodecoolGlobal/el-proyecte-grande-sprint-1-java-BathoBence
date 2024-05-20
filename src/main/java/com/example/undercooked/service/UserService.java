@@ -3,7 +3,6 @@ package com.example.undercooked.service;
 import com.example.undercooked.dto.RecipeInfoDTO;
 import com.example.undercooked.model.IngredientMaterial;
 import com.example.undercooked.model.PantryItem;
-import com.example.undercooked.model.Recipe;
 import com.example.undercooked.model.user.NewPantryItemRequest;
 import com.example.undercooked.model.user.UserEntity;
 import com.example.undercooked.repository.IngredientMaterialRepository;
@@ -65,7 +64,7 @@ public class UserService {
         return newPantryItem;
     }
 
-    public List<RecipeInfoDTO> getAvailableRecipesBasedOnUserPantryItems(String userName){
+    public List<RecipeInfoDTO> getAvailableRecipesBasedOnUserPantryItems(String userName) {
         List<PantryItem> userPantryItems = getPantryItemsByUserName(userName);
         return recipeService.getRecipesByUserPantryItems(userPantryItems);
     }

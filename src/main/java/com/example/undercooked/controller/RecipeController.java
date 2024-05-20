@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api/recipes")
 public class RecipeController {
 
-    private RecipeService recipeService;
+    private final RecipeService recipeService;
 
     @Autowired
     public RecipeController(RecipeService recipeService) {
@@ -28,15 +28,9 @@ public class RecipeController {
         List<RecipeInfoDTO> recipes = recipeService.getAllRecipe();
         return ResponseEntity.ok(recipes);
     }
-    /*
-    @GetMapping("/byingredients")
-    public ResponseEntity<?> getRecipesByIngredient() {
-        List<RecipeInfoDTO> recipes = recipeService.getRecipesByIngredients();
-        return ResponseEntity.ok(recipes);
-    } */
 
     @GetMapping("/{id}")
-    public Recipe getRecipeById(@PathVariable long id){
+    public Recipe getRecipeById(@PathVariable long id) {
         return recipeService.getRecipeById(id);
     }
 
