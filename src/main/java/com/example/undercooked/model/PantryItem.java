@@ -1,5 +1,6 @@
 package com.example.undercooked.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +12,7 @@ public class PantryItem {
 
     @ManyToOne
     @JoinColumn(name = "ingredientmaterial_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_pantryitem_ingredientmaterial"))
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private IngredientMaterial material;
     private double amount;
     private String unit;

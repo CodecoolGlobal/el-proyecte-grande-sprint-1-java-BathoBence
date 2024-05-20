@@ -48,7 +48,7 @@ public class UserService {
 
     }
 
-    public void addPantryItem(String userName, NewPantryItemRequest pantryItemRequest) throws HttpClientErrorException.BadRequest {
+    public PantryItem addPantryItem(String userName, NewPantryItemRequest pantryItemRequest) throws HttpClientErrorException.BadRequest {
         IngredientMaterial ingredientMaterial = ingredientMaterialRepository.getReferenceById((long) pantryItemRequest.id());
 
         if (pantryItemRequest.amount() <= 0) {
@@ -62,11 +62,11 @@ public class UserService {
             user.addPantryItem(newPantryItem);
             userRepository.save(user);
         }
+        return newPantryItem;
     }
 
     public List<RecipeInfoDTO> getAvailableRecipesBasedOnUserPantryItems(String userName){
         List<PantryItem> userPantryItems = getPantryItemsByUserName(userName);
-        System.out.println("*******************************");
         return recipeService.getRecipesByUserPantryItems(userPantryItems);
     }
 }

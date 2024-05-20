@@ -85,8 +85,8 @@ public class UserController {
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> addPantryItem(HttpServletRequest request, @RequestBody NewPantryItemRequest pantryItemRequest) {
         String userName = getUserNameFromToken(request);
-        userService.addPantryItem(userName, pantryItemRequest);
-        return ResponseEntity.ok("");
+        PantryItem pantryItem =userService.addPantryItem(userName, pantryItemRequest);
+        return ResponseEntity.ok(pantryItem);
     }
 
     @GetMapping("/recipes")
